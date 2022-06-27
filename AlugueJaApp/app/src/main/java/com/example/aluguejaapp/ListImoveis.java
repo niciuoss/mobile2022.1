@@ -19,6 +19,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.firebase.client.Firebase;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.UUID;
 //import com.google.firebase.ktx.Firebase;
 
 public class ListImoveis extends AppCompatActivity {
@@ -38,6 +40,7 @@ public class ListImoveis extends AppCompatActivity {
     Button btnConfirma;
     boolean edit;
     int idEditar;
+    String id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +48,7 @@ public class ListImoveis extends AppCompatActivity {
         setContentView(R.layout.activity_list_imoveis);
 
         Imoveis imovel = new Imoveis();
+        String uniqueID = UUID.randomUUID().toString();
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
         Firebase.setAndroidContext(this);
@@ -60,30 +64,32 @@ public class ListImoveis extends AppCompatActivity {
         edtBanheiros = findViewById(R.id.editTextBanheiros);
         edtContato = findViewById(R.id.editTextContato);
 
-        inicializarFirebase();
+        //inicializarFirebase();
 
 
-//        meuFirebase = new Firebase("https://alugueja-app-a39b6-default-rtdb.firebaseio.com/");
-//
-//        btnConfirma.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                //DatabaseReference imoveis = mDatabase.child("Imoveis");
-//                imovel.setRua(edtRua.getText().toString());
-//                imovel.setNumero(edtNumero.getText().toString());
-//                imovel.setBairro(edtBairro.getText().toString());
-//                imovel.setCidade(edtCidade.getText().toString());
-//                imovel.setUf(edtUf.getText().toString());
-//                imovel.setMensalidade(edtMensalidade.getText().toString());
-//                imovel.setQuartos(edtQuartos.getText().toString());
-//                imovel.setBanheiros(edtBanheiros.getText().toString());
-//                imovel.setBanheiros(edtContato.getText().toString());
-//
-//                imovel.salvar();
-//                Firebase no01 = meuFirebase.child("Imoveis");
-//                no01.setValue(imovel);
-//
+        meuFirebase = new Firebase("https://alugueja-app-a39b6-default-rtdb.firebaseio.com/");
+
+        btnConfirma.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                DatabaseReference imoveis = mDatabase.child("Imoveis");
+                imovel.setId(uniqueID);
+                imovel.setRua(edtRua.getText().toString());
+                imovel.setNumero(edtNumero.getText().toString());
+                imovel.setBairro(edtBairro.getText().toString());
+                imovel.setCidade(edtCidade.getText().toString());
+                imovel.setUf(edtUf.getText().toString());
+                imovel.setMensalidade(edtMensalidade.getText().toString());
+                imovel.setQuartos(edtQuartos.getText().toString());
+                imovel.setBanheiros(edtBanheiros.getText().toString());
+                imovel.setContato(edtContato.getText().toString());
+
+                //imovel.salvar();
+                Firebase no01 = meuFirebase.child("Imoveis");
+                no01.setValue(imovel);
+                finish();
+
 ////                if(!TextUtils.isEmpty(imovel.getRua()) || !TextUtils.isEmpty(imovel.getNumero()) || !TextUtils.isEmpty(imovel.getBairro()) ||
 ////                        !TextUtils.isEmpty(imovel.getCidade()) || !TextUtils.isEmpty(imovel.getUf()) || !TextUtils.isEmpty(imovel.getMensalidade()) ||
 ////                        !TextUtils.isEmpty(imovel.getQuartos()) || !TextUtils.isEmpty(imovel.getBanheiros())){
@@ -91,8 +97,8 @@ public class ListImoveis extends AppCompatActivity {
 ////                }else{
 ////                    Toast.makeText(ListImoveis.this, "Error", Toast.LENGTH_SHORT).show();
 ////                }
-//            }
-//        });
+            }
+        });
 
 
         edit = false;
