@@ -154,7 +154,7 @@ public class TelaInicial extends AppCompatActivity {
             String mensalidade = (String) data.getExtras().get("mensalidade");
             String quartos = (String) data.getExtras().get("quartos");
             String banheiros = (String) data.getExtras().get("banheiros");
-            int idEdit = (int) data.getExtras().get("id");
+            String idEdit = (String) data.getExtras().get("id");
 
             for (Imoveis imovel : listItem) {
                 if (imovel.getId() == idEdit) {

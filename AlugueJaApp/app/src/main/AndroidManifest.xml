@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AlugueJaApp">
         <activity
+            android:name=".CadastroUser"
+            android:exported="false" />
+        <activity
             android:name=".ListImoveis"
             android:exported="false" />
         <activity

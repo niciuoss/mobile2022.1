@@ -63,46 +63,34 @@
         android:orientation="horizontal">
 
         <CheckBox
-            android:id="@+id/ckbMostrarSenha"
+            android:id="@+id/ckbMostrarSenhaCad"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Mostrar Senha" />
     </LinearLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <Button
-            android:id="@+id/btnEntrar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Entrar"
-            android:textAlignment="center"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/textCadastrar"
+        <Button
+            android:id="@+id/btnEntrar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Cadastre-se"
-            android:textAlignment="center"
-            android:textColor="#3F51B5"
-            android:textStyle="bold" />
+            android:text="Entrar"
+            android:textAlignment="center" />
+
+        <Button
+            android:id="@+id/btnCadastroUser"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Cadastrar" />
 
         <ProgressBar
-            android:id="@+id/loginProgressBar"
+            android:id="@+id/loginProgressBarCad"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:indeterminate="true"

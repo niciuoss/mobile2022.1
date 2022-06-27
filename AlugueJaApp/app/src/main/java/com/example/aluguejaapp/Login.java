@@ -14,7 +14,6 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -26,7 +25,7 @@ public class Login extends AppCompatActivity {
     private EditText edtEmail;
     private EditText edtSenha;
     private Button btnEntrar;
-    private TextView txtCadastrar;
+    private Button btnCadastrar;
     private FirebaseAuth mAuth;
     private ProgressBar prgBar;
     private CheckBox chkBox;
@@ -41,9 +40,9 @@ public class Login extends AppCompatActivity {
         edtEmail = findViewById(R.id.editTextEmail);
         edtSenha = findViewById(R.id.editTextSenha);
         btnEntrar = findViewById(R.id.btnEntrar);
-        txtCadastrar = findViewById(R.id.textCadastrar);
-        prgBar = findViewById(R.id.loginProgressBar);
-        chkBox = findViewById(R.id.ckbMostrarSenha);
+        btnCadastrar = findViewById(R.id.btnCadastroUser);
+        prgBar = findViewById(R.id.loginProgressBarCad);
+        chkBox = findViewById(R.id.ckbMostrarSenhaCad);
 
         btnEntrar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,6 +66,14 @@ public class Login extends AppCompatActivity {
                         }
                     });
                 }
+            }
+        });
+
+        btnCadastrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Login.this, CadastroUser.class);
+                startActivity(intent);
             }
         });
 

@@ -67,31 +67,33 @@ public class ListImoveis extends AppCompatActivity {
     }
 
     public void confirmarBtn(View view){
-        Intent intent = new Intent();
 
-        String rua = edtRua.getText().toString();
-        String numero = edtNumero.getText().toString();
-        String bairro = edtBairro.getText().toString();
-        String cidade = edtCidade.getText().toString();
-        String uf = edtUf.getText().toString();
-        String mensalidade = edtMensalidade.getText().toString();
-        String quartos = edtQuartos.getText().toString();
-        String banheiros = edtBanheiros.getText().toString();
 
-        intent.putExtra("rua", rua);
-        intent.putExtra("numero",numero);
-        intent.putExtra("bairro", bairro);
-        intent.putExtra("cidade", cidade);
-        intent.putExtra("uf", uf);
-        intent.putExtra("mensalidade", mensalidade);
-        intent.putExtra("quartos", quartos);
-        intent.putExtra("banheiros", banheiros);
-
-        if(edit){
-            intent.putExtra("id", idEditar);
-        }
-
-        setResult(Constants.RES_ADD_IMOVEL, intent);
-        finish();
+//        Intent intent = new Intent();
+//
+//        String rua = edtRua.getText().toString();
+//        String numero = edtNumero.getText().toString();
+//        String bairro = edtBairro.getText().toString();
+//        String cidade = edtCidade.getText().toString();
+//        String uf = edtUf.getText().toString();
+//        String mensalidade = edtMensalidade.getText().toString();
+//        String quartos = edtQuartos.getText().toString();
+//        String banheiros = edtBanheiros.getText().toString();
+//
+//        intent.putExtra("rua", rua);
+//        intent.putExtra("numero",numero);
+//        intent.putExtra("bairro", bairro);
+//        intent.putExtra("cidade", cidade);
+//        intent.putExtra("uf", uf);
+//        intent.putExtra("mensalidade", mensalidade);
+//        intent.putExtra("quartos", quartos);
+//        intent.putExtra("banheiros", banheiros);
+//
+//        if(edit){
+//            intent.putExtra("id", idEditar);
+//        }
+//
+//        setResult(Constants.RES_ADD_IMOVEL, intent);
+//        finish();
     }
 }
