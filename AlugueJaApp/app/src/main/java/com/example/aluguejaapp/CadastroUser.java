@@ -83,27 +83,28 @@ public class CadastroUser extends AppCompatActivity {
                 String cadSenha01 = edtSenhaCad01.getText().toString();
                 String cadSenha02 = edtSenhaCad02.getText().toString();
 
-                if(!TextUtils.isEmpty(usuario.getEmail()) || !TextUtils.isEmpty(cadSenha01) || !TextUtils.isEmpty(cadSenha02) ||
-                        !TextUtils.isEmpty(usuario.getNome()) || !TextUtils.isEmpty(usuario.getCpf()) || !TextUtils.isEmpty(usuario.getCidade()) ||
-                        !TextUtils.isEmpty(usuario.getCidade()) || !TextUtils.isEmpty(usuario.getUf())){
-                    if(cadSenha01.equals(cadSenha02)){
+                if(TextUtils.isEmpty(usuario.getEmail()) || TextUtils.isEmpty(cadSenha01) || TextUtils.isEmpty(cadSenha02) ||
+                        TextUtils.isEmpty(usuario.getNome()) || TextUtils.isEmpty(usuario.getCpf()) || TextUtils.isEmpty(usuario.getCidade()) ||
+                        TextUtils.isEmpty(usuario.getCidade()) || TextUtils.isEmpty(usuario.getUf())){
+                    Toast.makeText(CadastroUser.this, "ERRO", Toast.LENGTH_SHORT).show();
+                } else {
+                    if (cadSenha01.equals(cadSenha02)){
                         prgsBarCad.setVisibility(View.VISIBLE);
-
                         mAuth.createUserWithEmailAndPassword(usuario.getEmail(), cadSenha01).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
-                                if(task.isSuccessful()){
+                                if (task.isSuccessful()){
                                     usuario.setId(mAuth.getUid());
                                     usuario.salvar();
                                     abrirTelaInicial();
-                                }else{
+                                } else {
                                     String error = task.getException().getMessage();
                                     Toast.makeText(CadastroUser.this, ""+error, Toast.LENGTH_SHORT).show();
                                 }
                                 prgsBarCad.setVisibility(View.INVISIBLE);
                             }
                         });
-                    } else {
+                    } else { //Senhas Diferentes
                         Toast.makeText(CadastroUser.this, "Senhas devem ser iguais!", Toast.LENGTH_SHORT).show();
                     }
                 }

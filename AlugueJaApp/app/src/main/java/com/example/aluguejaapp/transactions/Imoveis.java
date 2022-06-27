@@ -4,7 +4,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class Imoveis {
-    //private  static  int contadorId = 0;
     String id;
     String rua;
     String numero;
@@ -18,7 +17,6 @@ public class Imoveis {
 
 
     public Imoveis(String rua, String numero, String bairro, String cidade, String uf, String mensalidade, String quartos, String banheiros, String contato) {
-        //this.id = contadorId++;
         this.rua = rua;
         this.numero = numero;
         this.bairro = bairro;
@@ -111,11 +109,6 @@ public class Imoveis {
 
     public void setBanheiros(String banheiros) {
         this.banheiros = banheiros;
-    }
-
-    public void salvar(){
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
-        reference.child("Imoveis").child(getId()).setValue(this);
     }
 
     @Override

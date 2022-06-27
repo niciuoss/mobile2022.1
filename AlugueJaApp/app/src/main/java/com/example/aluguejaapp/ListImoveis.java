@@ -64,9 +64,6 @@ public class ListImoveis extends AppCompatActivity {
         edtBanheiros = findViewById(R.id.editTextBanheiros);
         edtContato = findViewById(R.id.editTextContato);
 
-        //inicializarFirebase();
-
-
         meuFirebase = new Firebase("https://alugueja-app-a39b6-default-rtdb.firebaseio.com/");
 
         btnConfirma.setOnClickListener(new View.OnClickListener() {
@@ -85,21 +82,17 @@ public class ListImoveis extends AppCompatActivity {
                 imovel.setBanheiros(edtBanheiros.getText().toString());
                 imovel.setContato(edtContato.getText().toString());
 
-                //imovel.salvar();
-                Firebase no01 = meuFirebase.child("Imoveis");
-                no01.setValue(imovel);
-                finish();
-
-////                if(!TextUtils.isEmpty(imovel.getRua()) || !TextUtils.isEmpty(imovel.getNumero()) || !TextUtils.isEmpty(imovel.getBairro()) ||
-////                        !TextUtils.isEmpty(imovel.getCidade()) || !TextUtils.isEmpty(imovel.getUf()) || !TextUtils.isEmpty(imovel.getMensalidade()) ||
-////                        !TextUtils.isEmpty(imovel.getQuartos()) || !TextUtils.isEmpty(imovel.getBanheiros())){
-////                    mDatabase.child("Imoveis").child(imovel.getId()).setValue(imovel);
-////                }else{
-////                    Toast.makeText(ListImoveis.this, "Error", Toast.LENGTH_SHORT).show();
-////                }
+                if(TextUtils.isEmpty(imovel.getRua()) || TextUtils.isEmpty(imovel.getNumero()) || TextUtils.isEmpty(imovel.getBairro()) ||
+                        TextUtils.isEmpty(imovel.getCidade()) || TextUtils.isEmpty(imovel.getUf()) || TextUtils.isEmpty(imovel.getMensalidade()) ||
+                        TextUtils.isEmpty(imovel.getQuartos()) || TextUtils.isEmpty(imovel.getBanheiros())){
+                    Toast.makeText(ListImoveis.this, "Error", Toast.LENGTH_SHORT).show();
+                }else{
+                    Firebase no01 = meuFirebase.child("Imoveis");
+                    no01.setValue(imovel);
+                    finish();
+                }
             }
         });
-
 
         edit = false;
 
@@ -138,36 +131,4 @@ public class ListImoveis extends AppCompatActivity {
         setResult(Constants.RES_CANCEL_IMOVEL);
         finish();
     }
-
-//   public void confirmarBtn(View view){
-//
-//        Intent intent = new Intent();
-//
-//        String rua = edtRua.getText().toString();
-//        String numero = edtNumero.getText().toString();
-//        String bairro = edtBairro.getText().toString();
-//        String cidade = edtCidade.getText().toString();
-//        String uf = edtUf.getText().toString();
-//        String mensalidade = edtMensalidade.getText().toString();
-//        String quartos = edtQuartos.getText().toString();
-//        String banheiros = edtBanheiros.getText().toString();
-//        String contato = edtContato.getText().toString();
-//
-//        intent.putExtra("rua", rua);
-//        intent.putExtra("numero",numero);
-//        intent.putExtra("bairro", bairro);
-//        intent.putExtra("cidade", cidade);
-//        intent.putExtra("uf", uf);
-//        intent.putExtra("mensalidade", mensalidade);
-//        intent.putExtra("quartos", quartos);
-//        intent.putExtra("banheiros", banheiros);
-//        intent.putExtra("contato", contato);
-//
-//        if(edit){
-//            intent.putExtra("id", idEditar);
-//        }
-//
-//        setResult(Constants.RES_ADD_IMOVEL, intent);
-//        finish();
-//    }
 }
