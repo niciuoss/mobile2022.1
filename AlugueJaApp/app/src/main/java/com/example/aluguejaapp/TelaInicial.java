@@ -81,9 +81,6 @@ public class TelaInicial extends AppCompatActivity {
             case R.id.settings:
                 configuracoes();
                 break;
-            case R.id.about:
-                sobre();
-                break;
             case R.id.logout:
                 sair();
                 break;
@@ -96,15 +93,6 @@ public class TelaInicial extends AppCompatActivity {
         startActivityForResult(intent, Constants.REQUEST_ADD_IMOVEL);
     }
 
-    public void removeImovel() {
-        //Intent intent = new Intent(this, removeImoveis.class);
-        //startActivityForResult(intent, Constants.REQUEST_DEL_IMOVEL);
-    }
-
-    public void sobre() {
-
-    }
-
     public void sair() {
         mAuth.signOut();
         Intent intent = new Intent(this, Login.class);
@@ -113,11 +101,13 @@ public class TelaInicial extends AppCompatActivity {
     }
 
     public void configuracoes() {
-
+        Intent intent = new Intent(this, Configuracoes.class);
+        startActivity(intent);
     }
 
     public void favoritaImovel() {
-
+        Intent intent = new Intent(this, Favoritos.class);
+        startActivity(intent);
     }
 
     public void notificacao() {
@@ -125,7 +115,8 @@ public class TelaInicial extends AppCompatActivity {
     }
 
     public void perfilUsuario() {
-
+        Intent intent = new Intent(this, PerfilUser.class);
+        startActivity(intent);
     }
 
     @Override
@@ -141,7 +132,8 @@ public class TelaInicial extends AppCompatActivity {
             String mensalidade = (String) data.getExtras().get("mensalidade");
             String quartos = (String) data.getExtras().get("quartos");
             String banheiros = (String) data.getExtras().get("banheiros");
-            Imoveis imovel = new Imoveis(rua, numero, bairro, cidade, uf, mensalidade, quartos, banheiros);
+            String contato = (String) data.getExtras().get("contato");
+            Imoveis imovel = new Imoveis(rua, numero, bairro, cidade, uf, mensalidade, quartos, banheiros, contato);
             listItem.add(imovel);
             adapter.notifyDataSetChanged();
 
@@ -154,6 +146,7 @@ public class TelaInicial extends AppCompatActivity {
             String mensalidade = (String) data.getExtras().get("mensalidade");
             String quartos = (String) data.getExtras().get("quartos");
             String banheiros = (String) data.getExtras().get("banheiros");
+            String contato = (String) data.getExtras().get("contato");
             String idEdit = (String) data.getExtras().get("id");
 
             for (Imoveis imovel : listItem) {
@@ -166,6 +159,7 @@ public class TelaInicial extends AppCompatActivity {
                     imovel.setMensalidade(mensalidade);
                     imovel.setQuartos(quartos);
                     imovel.setBanheiros(banheiros);
+                    imovel.setContato(contato);
                 }
             }
             adapter.notifyDataSetChanged();

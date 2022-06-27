@@ -10,6 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AlugueJaApp">
         <activity
+            android:name=".Configuracoes"
+            android:exported="false" />
+        <activity
+            android:name=".Favoritos"
+            android:exported="false" />
+        <activity
+            android:name=".PerfilUser"
+            android:exported="false" />
+        <activity
             android:name=".CadastroUser"
             android:exported="false" />
         <activity
