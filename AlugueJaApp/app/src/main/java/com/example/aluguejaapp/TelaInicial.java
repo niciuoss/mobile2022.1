@@ -23,7 +23,7 @@ import java.util.ArrayList;
 
 public class TelaInicial extends AppCompatActivity {
     int selected;
-    private FirebaseAuth mAuth;
+    //private FirebaseAuth mAuth;
     ArrayList<Imoveis> listItem;
     ArrayAdapter adapter;
     ListView listaDeImoveis;
@@ -33,7 +33,7 @@ public class TelaInicial extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mAuth = FirebaseAuth.getInstance();
+        //mAuth = FirebaseAuth.getInstance();
 
         setContentView(R.layout.activity_tela_inicial);
 
@@ -94,7 +94,7 @@ public class TelaInicial extends AppCompatActivity {
     }
 
     public void sair() {
-        mAuth.signOut();
+        //mAuth.signOut();
         Intent intent = new Intent(this, Login.class);
         startActivity(intent);
         finish();
@@ -147,7 +147,7 @@ public class TelaInicial extends AppCompatActivity {
             String quartos = (String) data.getExtras().get("quartos");
             String banheiros = (String) data.getExtras().get("banheiros");
             String contato = (String) data.getExtras().get("contato");
-            String idEdit = (String) data.getExtras().get("id");
+            int idEdit = (int) data.getExtras().get("id");
 
             for (Imoveis imovel : listItem) {
                 if (imovel.getId() == idEdit) {

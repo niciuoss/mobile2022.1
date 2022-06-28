@@ -4,19 +4,21 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class Imoveis {
-    String id;
-    String rua;
-    String numero;
-    String bairro;
-    String cidade;
-    String uf;
-    String mensalidade;
-    String quartos;
-    String banheiros;
-    String contato;
+    private int id;
+    private static int contadorId = 0;
+    private String rua;
+    private String numero;
+    private String bairro;
+    private String cidade;
+    private String uf;
+    private String mensalidade;
+    private String quartos;
+    private String banheiros;
+    private String contato;
 
 
     public Imoveis(String rua, String numero, String bairro, String cidade, String uf, String mensalidade, String quartos, String banheiros, String contato) {
+        this.id = contadorId++;
         this.rua = rua;
         this.numero = numero;
         this.bairro = bairro;
@@ -31,11 +33,11 @@ public class Imoveis {
 
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
