@@ -1,9 +1,7 @@
 package com.example.aluguejaapp;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.arch.core.executor.DefaultTaskExecutor;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -13,9 +11,7 @@ import android.widget.Toast;
 
 import com.example.aluguejaapp.transactions.Constants;
 import com.example.aluguejaapp.transactions.Imoveis;
-import com.example.aluguejaapp.transactions.Usuario;
 import com.google.firebase.FirebaseApp;
-import com.google.firebase.auth.FirebaseAuth;
 import com.firebase.client.Firebase;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -128,7 +124,7 @@ public class ListImoveis extends AppCompatActivity {
     }
 
     public void cancelarBtn(View view){
-        setResult(Constants.RES_CANCEL_IMOVEL);
+        setResult(Constants.RESULT_CANCEL_IMOVEL);
         finish();
     }
 }

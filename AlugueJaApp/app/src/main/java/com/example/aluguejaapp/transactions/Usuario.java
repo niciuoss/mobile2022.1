@@ -3,6 +3,8 @@ package com.example.aluguejaapp.transactions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
+
 public class Usuario {
     private String id;
     private String nome;
@@ -11,6 +13,7 @@ public class Usuario {
     private String cpf;
     private String cidade;
     private String uf;
+    //private ArrayList<String> id;
 
     public Usuario() {
     }
