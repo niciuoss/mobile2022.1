@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -28,7 +29,6 @@ public class TelaInicial extends AppCompatActivity {
     ArrayAdapter adapter;
     ListView listaDeImoveis;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +40,16 @@ public class TelaInicial extends AppCompatActivity {
         selected = -1;
 
         listItem = new ArrayList<Imoveis>();
+
+        Imoveis imovel_1 = new Imoveis("Rua A", "10", "Centro", "Quixadá", "CE", "850", "3", "2","(88) 987654321");
+        Imoveis imovel_2 = new Imoveis("Rua B", "15", "Centro", "Quixadá", "CE", "650", "2", "1","(88) 985487345");
+        Imoveis imovel_3 = new Imoveis("Rua B", "12", "Centro", "Quixadá", "CE", "800", "2", "2","(88) 987654321");
+
+        Imoveis[] imoveisAdd = {imovel_1, imovel_2, imovel_3};
+
+        for (int i = 0; i < imoveisAdd.length; i++){
+            listItem.add(imoveisAdd[i]);
+        }
 
         adapter = new ArrayAdapter(this, android.R.layout.simple_expandable_list_item_1, listItem);
         listaDeImoveis = (ListView) findViewById(R.id.idListaImoveis);
