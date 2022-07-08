@@ -1,6 +1,7 @@
 package com.example.aluguejaapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.arch.core.executor.DefaultTaskExecutor;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,7 +13,9 @@ import android.widget.Toast;
 
 import com.example.aluguejaapp.transactions.Constants;
 import com.example.aluguejaapp.transactions.Imoveis;
+import com.example.aluguejaapp.transactions.Usuario;
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
 import com.firebase.client.Firebase;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -22,9 +25,9 @@ import java.util.UUID;
 
 public class ListImoveis extends AppCompatActivity {
 
-//    DatabaseReference mDatabase;
-//    Firebase meuFirebase;
-//    FirebaseDatabase firebaseDatabase;
+    DatabaseReference mDatabase;
+    Firebase meuFirebase;
+    FirebaseDatabase firebaseDatabase;
     EditText edtRua;
     EditText edtNumero;
     EditText edtBairro;
@@ -37,20 +40,20 @@ public class ListImoveis extends AppCompatActivity {
     Button btnConfirma;
     boolean edit;
     int idEditar;
-//    String id;
+    String id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_imoveis);
 
-//        Imoveis imovel = new Imoveis();
-        //String uniqueID = UUID.randomUUID().toString();
+        Imoveis imovel = new Imoveis();
+        String uniqueID = UUID.randomUUID().toString();
 
-//        mDatabase = FirebaseDatabase.getInstance().getReference();
-//        Firebase.setAndroidContext(this);
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        Firebase.setAndroidContext(this);
 
-//        btnConfirma = findViewById(R.id.btnConfirm);
+        btnConfirma = findViewById(R.id.btnConfirm);
         edtRua = findViewById(R.id.editTextRua);
         edtNumero = findViewById(R.id.editTextNumero);
         edtBairro = findViewById(R.id.editTextBairro);
@@ -61,35 +64,35 @@ public class ListImoveis extends AppCompatActivity {
         edtBanheiros = findViewById(R.id.editTextBanheiros);
         edtContato = findViewById(R.id.editTextContato);
 
-//        meuFirebase = new Firebase("https://alugueja-app-a39b6-default-rtdb.firebaseio.com/");
+        meuFirebase = new Firebase("https://alugueja-app-a39b6-default-rtdb.firebaseio.com/");
 
-//        btnConfirma.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                DatabaseReference imoveis = mDatabase.child("Imoveis");
-//                imovel.setId(uniqueID);
-//                imovel.setRua(edtRua.getText().toString());
-//                imovel.setNumero(edtNumero.getText().toString());
-//                imovel.setBairro(edtBairro.getText().toString());
-//                imovel.setCidade(edtCidade.getText().toString());
-//                imovel.setUf(edtUf.getText().toString());
-//                imovel.setMensalidade(edtMensalidade.getText().toString());
-//                imovel.setQuartos(edtQuartos.getText().toString());
-//                imovel.setBanheiros(edtBanheiros.getText().toString());
-//                imovel.setContato(edtContato.getText().toString());
-//
-//                if(TextUtils.isEmpty(imovel.getRua()) || TextUtils.isEmpty(imovel.getNumero()) || TextUtils.isEmpty(imovel.getBairro()) ||
-//                        TextUtils.isEmpty(imovel.getCidade()) || TextUtils.isEmpty(imovel.getUf()) || TextUtils.isEmpty(imovel.getMensalidade()) ||
-//                        TextUtils.isEmpty(imovel.getQuartos()) || TextUtils.isEmpty(imovel.getBanheiros())){
-//                    Toast.makeText(ListImoveis.this, "Error", Toast.LENGTH_SHORT).show();
-//                }else{
-//                    Firebase no01 = meuFirebase.child("Imoveis");
-//                    no01.setValue(imovel);
-//                    finish();
-//                }
-//            }
-//        });
+        btnConfirma.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                DatabaseReference imoveis = mDatabase.child("Imoveis");
+                imovel.setId(uniqueID);
+                imovel.setRua(edtRua.getText().toString());
+                imovel.setNumero(edtNumero.getText().toString());
+                imovel.setBairro(edtBairro.getText().toString());
+                imovel.setCidade(edtCidade.getText().toString());
+                imovel.setUf(edtUf.getText().toString());
+                imovel.setMensalidade(edtMensalidade.getText().toString());
+                imovel.setQuartos(edtQuartos.getText().toString());
+                imovel.setBanheiros(edtBanheiros.getText().toString());
+                imovel.setContato(edtContato.getText().toString());
+
+                if(TextUtils.isEmpty(imovel.getRua()) || TextUtils.isEmpty(imovel.getNumero()) || TextUtils.isEmpty(imovel.getBairro()) ||
+                        TextUtils.isEmpty(imovel.getCidade()) || TextUtils.isEmpty(imovel.getUf()) || TextUtils.isEmpty(imovel.getMensalidade()) ||
+                        TextUtils.isEmpty(imovel.getQuartos()) || TextUtils.isEmpty(imovel.getBanheiros())){
+                    Toast.makeText(ListImoveis.this, "Error", Toast.LENGTH_SHORT).show();
+                }else{
+                    Firebase no01 = meuFirebase.child("Imoveis");
+                    no01.child(uniqueID).setValue(imovel);
+                    finish();
+                }
+            }
+        });
 
         edit = false;
 
@@ -118,45 +121,14 @@ public class ListImoveis extends AppCompatActivity {
         }
     }
 
-//    private void inicializarFirebase() {
-//        FirebaseApp.initializeApp(ListImoveis.this);
-//        firebaseDatabase = FirebaseDatabase.getInstance();
-//        mDatabase = firebaseDatabase.getReference();
-//    }
+    private void inicializarFirebase() {
+        FirebaseApp.initializeApp(ListImoveis.this);
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        mDatabase = firebaseDatabase.getReference();
+    }
 
     public void cancelarBtn(View view){
-        setResult(Constants.RESULT_CANCEL_IMOVEL);
+        setResult(Constants.RES_CANCEL_IMOVEL);
         finish();
     }
-
-    public void confirmarBtn(View view){
-
-        Intent intent = new Intent();
-
-        String rua = edtRua.getText().toString();
-        String numero = edtNumero.getText().toString();
-        String bairro = edtBairro.getText().toString();
-        String cidade = edtCidade.getText().toString();
-        String uf = edtUf.getText().toString();
-        String mensalidade = edtMensalidade.getText().toString();
-        String quartos = edtQuartos.getText().toString();
-        String banheiros = edtBanheiros.getText().toString();
-
-        intent.putExtra("rua", rua);
-        intent.putExtra("numero",numero);
-        intent.putExtra("bairro", bairro);
-        intent.putExtra("cidade", cidade);
-        intent.putExtra("uf", uf);
-        intent.putExtra("mensalidade", mensalidade);
-        intent.putExtra("quartos", quartos);
-        intent.putExtra("banheiros", banheiros);
-
-        if(edit){
-            intent.putExtra("id", idEditar);
-        }
-
-        setResult(Constants.RESULT_ADD_IMOVEL, intent);
-        finish();
-    }
-
 }

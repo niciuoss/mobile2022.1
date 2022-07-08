@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -24,32 +23,23 @@ import java.util.ArrayList;
 
 public class TelaInicial extends AppCompatActivity {
     int selected;
-    //private FirebaseAuth mAuth;
+    private FirebaseAuth mAuth;
     ArrayList<Imoveis> listItem;
     ArrayAdapter adapter;
     ListView listaDeImoveis;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //mAuth = FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance();
 
         setContentView(R.layout.activity_tela_inicial);
 
         selected = -1;
 
         listItem = new ArrayList<Imoveis>();
-
-        Imoveis imovel_1 = new Imoveis("Rua A", "10", "Centro", "Quixadá", "CE", "850", "3", "2","(88) 987654321");
-        Imoveis imovel_2 = new Imoveis("Rua B", "15", "Centro", "Quixadá", "CE", "650", "2", "1","(88) 985487345");
-        Imoveis imovel_3 = new Imoveis("Rua B", "12", "Centro", "Quixadá", "CE", "800", "2", "2","(88) 987654321");
-
-        Imoveis[] imoveisAdd = {imovel_1, imovel_2, imovel_3};
-
-        for (int i = 0; i < imoveisAdd.length; i++){
-            listItem.add(imoveisAdd[i]);
-        }
 
         adapter = new ArrayAdapter(this, android.R.layout.simple_expandable_list_item_1, listItem);
         listaDeImoveis = (ListView) findViewById(R.id.idListaImoveis);
@@ -66,6 +56,9 @@ public class TelaInicial extends AppCompatActivity {
         });
 
     }
+
+
+
 
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -104,7 +97,7 @@ public class TelaInicial extends AppCompatActivity {
     }
 
     public void sair() {
-        //mAuth.signOut();
+        mAuth.signOut();
         Intent intent = new Intent(this, Login.class);
         startActivity(intent);
         finish();
@@ -133,7 +126,7 @@ public class TelaInicial extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == Constants.REQUEST_ADD_IMOVEL && resultCode == Constants.RESULT_ADD_IMOVEL) {
+        if (requestCode == Constants.REQUEST_ADD_IMOVEL && resultCode == Constants.RES_ADD_IMOVEL) {
             String rua = (String) data.getExtras().get("rua");
             String numero = (String) data.getExtras().get("numero");
             String bairro = (String) data.getExtras().get("bairro");
@@ -147,7 +140,7 @@ public class TelaInicial extends AppCompatActivity {
             listItem.add(imovel);
             adapter.notifyDataSetChanged();
 
-        } else if (requestCode == Constants.REQUEST_EDT_IMOVEL && resultCode == Constants.RESULT_ADD_IMOVEL) {
+        } else if (requestCode == Constants.REQUEST_EDIT && resultCode == Constants.RES_ADD_IMOVEL) {
             String rua = (String) data.getExtras().get("rua");
             String numero = (String) data.getExtras().get("numero");
             String bairro = (String) data.getExtras().get("bairro");
@@ -157,7 +150,7 @@ public class TelaInicial extends AppCompatActivity {
             String quartos = (String) data.getExtras().get("quartos");
             String banheiros = (String) data.getExtras().get("banheiros");
             String contato = (String) data.getExtras().get("contato");
-            int idEdit = (int) data.getExtras().get("id");
+            String idEdit = (String) data.getExtras().get("id");
 
             for (Imoveis imovel : listItem) {
                 if (imovel.getId() == idEdit) {
