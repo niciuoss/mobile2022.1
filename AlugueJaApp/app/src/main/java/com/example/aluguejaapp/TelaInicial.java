@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -82,6 +83,11 @@ public class TelaInicial<childEventListener> extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_tela_inicial, menu);
         return super.onCreateOptionsMenu(menu);
+    }
+
+    public void onClickDetails (View view) {
+        Intent intent = new Intent(this, DetailImoveis.class);
+        startActivity(intent);
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:onClick="onClickDetails"
     android:orientation="vertical"
     tools:context=".TelaInicial">
 
@@ -15,7 +16,7 @@
         <ListView
             android:id="@+id/listviewtxt"
             android:layout_width="match_parent"
-            android:layout_height="650dp"></ListView>
+            android:layout_height="500dp"></ListView>
     </LinearLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -26,25 +27,13 @@
             android:id="@+id/btnDetalhes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="onClickDetails"
             android:text="@string/ver_mais"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.242"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.47" />
-
-        <Button
-            android:id="@+id/btnMap"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/mapa"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.752"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.47" />
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

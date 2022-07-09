@@ -27,6 +27,7 @@ public class Imoveis {
         this.mensalidade = mensalidade;
         this.quartos = quartos;
         this.banheiros = banheiros;
+        this.contato = contato;
     }
 
     public Imoveis(){
