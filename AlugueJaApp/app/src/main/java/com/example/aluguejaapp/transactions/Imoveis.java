@@ -3,6 +3,8 @@ package com.example.aluguejaapp.transactions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.Map;
+
 public class Imoveis {
     String id;
     String rua;
@@ -113,15 +115,8 @@ public class Imoveis {
 
     @Override
     public String toString() {
-        return "Imovel " + "- " +
-                "Rua: " + rua  +
-                ", Numero: " + numero +
-                ", Bairro: " + bairro +
+        return  "Bairro: " + bairro +
                 ", Cidade: " + cidade +
-                ", UF: " + uf +
-                ", Mensalidade: " + mensalidade +
-                ", Quartos: " + quartos +
-                ", Banheiros: " + banheiros +
-                ", Contato: " + contato;
+                ", Mensalidade: " + mensalidade;
     }
 }

@@ -1,64 +1,82 @@
 package com.example.aluguejaapp;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.aluguejaapp.transactions.Constants;
 import com.example.aluguejaapp.transactions.Imoveis;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
-public class TelaInicial extends AppCompatActivity {
-    int selected;
+public class TelaInicial<childEventListener> extends AppCompatActivity {
     private FirebaseAuth mAuth;
-    ArrayList<Imoveis> listItem;
-    ArrayAdapter adapter;
-    ListView listaDeImoveis;
 
+    DatabaseReference databaseReference;
+    ListView listView;
+    ArrayList<String> arrayList = new ArrayList<>();
+    ArrayAdapter<String> arrayAdapter;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate (Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-
-        mAuth = FirebaseAuth.getInstance();
-
         setContentView(R.layout.activity_tela_inicial);
+        databaseReference = FirebaseDatabase.getInstance().getReference("Imoveis");
+        listView = (ListView) findViewById(R.id.listviewtxt);
+        arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, arrayList);
+        listView.setAdapter(arrayAdapter);
 
-        selected = -1;
-
-        listItem = new ArrayList<Imoveis>();
-
-        adapter = new ArrayAdapter(this, android.R.layout.simple_expandable_list_item_1, listItem);
-        listaDeImoveis = (ListView) findViewById(R.id.idListaImoveis);
-        listaDeImoveis.setAdapter(adapter);
-        listaDeImoveis.setSelector(android.R.color.holo_blue_dark);
-
-        listaDeImoveis.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        databaseReference.addChildEventListener(new ChildEventListener() {
             @Override
-            public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
-                Toast.makeText(TelaInicial.this, "" + listItem.get(position).toString(),
-                        Toast.LENGTH_SHORT).show();
-                selected = position;
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String previousChildName) {
+                String value = dataSnapshot.getValue(Imoveis.class).toString();
+                arrayList.add(value);
+                arrayAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
-
     }
-
-
-
 
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -74,12 +92,6 @@ public class TelaInicial extends AppCompatActivity {
                 break;
             case R.id.properties:
                 addImovel();
-                break;
-            case R.id.favorite:
-                favoritaImovel();
-                break;
-            case R.id.notification:
-                notificacao();
                 break;
             case R.id.settings:
                 configuracoes();
@@ -108,66 +120,9 @@ public class TelaInicial extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void favoritaImovel() {
-        Intent intent = new Intent(this, Favoritos.class);
-        startActivity(intent);
-    }
-
-    public void notificacao() {
-
-    }
-
     public void perfilUsuario() {
         Intent intent = new Intent(this, PerfilUser.class);
         startActivity(intent);
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == Constants.REQUEST_ADD_IMOVEL && resultCode == Constants.RESULT_ADD_IMOVEL) {
-            String rua = (String) data.getExtras().get("rua");
-            String numero = (String) data.getExtras().get("numero");
-            String bairro = (String) data.getExtras().get("bairro");
-            String cidade = (String) data.getExtras().get("cidade");
-            String uf = (String) data.getExtras().get("uf");
-            String mensalidade = (String) data.getExtras().get("mensalidade");
-            String quartos = (String) data.getExtras().get("quartos");
-            String banheiros = (String) data.getExtras().get("banheiros");
-            String contato = (String) data.getExtras().get("contato");
-            Imoveis imovel = new Imoveis(rua, numero, bairro, cidade, uf, mensalidade, quartos, banheiros, contato);
-            listItem.add(imovel);
-            adapter.notifyDataSetChanged();
-
-        } else if (requestCode == Constants.REQUEST_EDT_IMOVEL && resultCode == Constants.RESULT_ADD_IMOVEL) {
-            String rua = (String) data.getExtras().get("rua");
-            String numero = (String) data.getExtras().get("numero");
-            String bairro = (String) data.getExtras().get("bairro");
-            String cidade = (String) data.getExtras().get("cidade");
-            String uf = (String) data.getExtras().get("uf");
-            String mensalidade = (String) data.getExtras().get("mensalidade");
-            String quartos = (String) data.getExtras().get("quartos");
-            String banheiros = (String) data.getExtras().get("banheiros");
-            String contato = (String) data.getExtras().get("contato");
-            String idEdit = (String) data.getExtras().get("id");
-
-            for (Imoveis imovel : listItem) {
-                if (imovel.getId() == idEdit) {
-                    imovel.setRua(rua);
-                    imovel.setNumero(numero);
-                    imovel.setBairro(bairro);
-                    imovel.setCidade(cidade);
-                    imovel.setUf(uf);
-                    imovel.setMensalidade(mensalidade);
-                    imovel.setQuartos(quartos);
-                    imovel.setBanheiros(banheiros);
-                    imovel.setContato(contato);
-                }
-            }
-            adapter.notifyDataSetChanged();
-
-        }
-
-    }
 }
