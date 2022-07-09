@@ -126,7 +126,7 @@ public class TelaInicial extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == Constants.REQUEST_ADD_IMOVEL && resultCode == Constants.RES_ADD_IMOVEL) {
+        if (requestCode == Constants.REQUEST_ADD_IMOVEL && resultCode == Constants.RESULT_ADD_IMOVEL) {
             String rua = (String) data.getExtras().get("rua");
             String numero = (String) data.getExtras().get("numero");
             String bairro = (String) data.getExtras().get("bairro");
@@ -140,7 +140,7 @@ public class TelaInicial extends AppCompatActivity {
             listItem.add(imovel);
             adapter.notifyDataSetChanged();
 
-        } else if (requestCode == Constants.REQUEST_EDIT && resultCode == Constants.RES_ADD_IMOVEL) {
+        } else if (requestCode == Constants.REQUEST_EDT_IMOVEL && resultCode == Constants.RESULT_ADD_IMOVEL) {
             String rua = (String) data.getExtras().get("rua");
             String numero = (String) data.getExtras().get("numero");
             String bairro = (String) data.getExtras().get("bairro");

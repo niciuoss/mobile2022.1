@@ -128,7 +128,7 @@ public class ListImoveis extends AppCompatActivity {
     }
 
     public void cancelarBtn(View view){
-        setResult(Constants.RES_CANCEL_IMOVEL);
+        setResult(Constants.RESULT_CANCEL_IMOVEL);
         finish();
     }
 }
