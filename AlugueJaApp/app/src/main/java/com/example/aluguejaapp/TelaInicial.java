@@ -21,6 +21,7 @@ import com.example.aluguejaapp.transactions.Constants;
 import com.example.aluguejaapp.transactions.Imoveis;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -43,6 +44,8 @@ public class TelaInicial<childEventListener> extends AppCompatActivity {
     @Override
     protected void onCreate (Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+
+        mAuth = FirebaseAuth.getInstance();
         setContentView(R.layout.activity_tela_inicial);
         databaseReference = FirebaseDatabase.getInstance().getReference("Imoveis");
         listView = (ListView) findViewById(R.id.listviewtxt);
@@ -94,7 +97,7 @@ public class TelaInicial<childEventListener> extends AppCompatActivity {
         Toast.makeText(TelaInicial.this, "" + item.getItemId(), Toast.LENGTH_SHORT).show();
         switch (item.getItemId()) {
             case R.id.profile:
-                perfilUsuario();
+                perfilUsuario(mAuth.getCurrentUser());
                 break;
             case R.id.properties:
                 addImovel();
@@ -126,8 +129,10 @@ public class TelaInicial<childEventListener> extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void perfilUsuario() {
+    public void perfilUsuario(FirebaseUser currentUser) {
         Intent intent = new Intent(this, PerfilUser.class);
+        intent.putExtra("email", currentUser.getEmail());
+        Log.v("DATA", currentUser.getUid());
         startActivity(intent);
     }
 
