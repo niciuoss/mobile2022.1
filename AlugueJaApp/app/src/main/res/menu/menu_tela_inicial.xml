@@ -9,10 +9,6 @@
         android:title="Adicionar Imoveis"
         android:icon="@drawable/ic_action_properties"
         app:showAsAction="ifRoom"/>
-    <item android:id="@+id/favorite"
-        android:title="Favoritos"/>
-    <item android:id="@+id/notification"
-        android:title="Notificações"/>
     <item android:id="@+id/settings"
         android:title="Configurações"/>
     <item android:id="@+id/about"

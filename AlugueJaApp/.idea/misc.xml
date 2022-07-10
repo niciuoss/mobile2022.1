@@ -21,12 +21,13 @@
         <entry key="..\:/Users/vinic/StudioProjects/AlugueJaApp/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
         <entry key="..\:/Users/wesll/AndroidStudioProjects/AlugueJaApp/app/src/main/res/layout/activity_cadastro_user.xml" value="0.375" />
         <entry key="..\:/Users/wesll/AndroidStudioProjects/AlugueJaApp/app/src/main/res/layout/activity_configuracoes.xml" value="0.375" />
-        <entry key="..\:/Users/wesll/AndroidStudioProjects/AlugueJaApp/app/src/main/res/layout/activity_detail_imoveis.xml" value="0.5" />
+        <entry key="..\:/Users/wesll/AndroidStudioProjects/AlugueJaApp/app/src/main/res/layout/activity_detail_imoveis.xml" value="0.33" />
         <entry key="..\:/Users/wesll/AndroidStudioProjects/AlugueJaApp/app/src/main/res/layout/activity_list_imoveis.xml" value="0.375" />
         <entry key="..\:/Users/wesll/AndroidStudioProjects/AlugueJaApp/app/src/main/res/layout/activity_maps.xml" value="0.36923076923076925" />
         <entry key="..\:/Users/wesll/AndroidStudioProjects/AlugueJaApp/app/src/main/res/layout/activity_perfil_user.xml" value="0.33" />
         <entry key="..\:/Users/wesll/AndroidStudioProjects/AlugueJaApp/app/src/main/res/layout/activity_tela_inicial.xml" value="0.33" />
         <entry key="..\:/Users/wesll/AndroidStudioProjects/AlugueJaApp/app/src/main/res/layout/login.xml" value="0.375" />
+        <entry key="..\:/Users/wesll/AndroidStudioProjects/AlugueJaApp/app/src/main/res/menu/menu_tela_inicial.xml" value="0.375" />
       </map>
     </option>
   </component>
