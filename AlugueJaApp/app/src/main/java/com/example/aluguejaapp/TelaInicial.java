@@ -40,8 +40,9 @@ public class TelaInicial<childEventListener> extends AppCompatActivity {
 
     DatabaseReference databaseReference;
     ListView listView;
-    ArrayList<String> arrayList = new ArrayList<>();
-    ArrayAdapter<String> arrayAdapter;
+    ArrayList<Imoveis> arrayList = new ArrayList<>();
+    ArrayAdapter<Imoveis> arrayAdapter;
+    int select;
 
     @Override
     protected void onCreate (Bundle savedInstanceState){
@@ -51,14 +52,25 @@ public class TelaInicial<childEventListener> extends AppCompatActivity {
         setContentView(R.layout.activity_tela_inicial);
         databaseReference = FirebaseDatabase.getInstance().getReference("Imoveis");
         listView = (ListView) findViewById(R.id.listviewtxt);
-        arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, arrayList);
+        arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, arrayList);
         listView.setAdapter(arrayAdapter);
+        select = -1;
+
+        listView.setSelector(android.R.color.holo_blue_dark);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
+                //Toast.makeText(TelaInicial.this, "" + arrayList.get(position).toString(), Toast.LENGTH_SHORT).show();
+                select = position;
+            }
+        });
 
         databaseReference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String previousChildName) {
-                String value = dataSnapshot.getValue(Imoveis.class).toString();
-                arrayList.add(value);
+                Imoveis imovel = dataSnapshot.getValue(Imoveis.class);
+                arrayList.add(imovel);
                 arrayAdapter.notifyDataSetChanged();
             }
 
@@ -92,6 +104,19 @@ public class TelaInicial<childEventListener> extends AppCompatActivity {
 
     public void onClickDetails (View view) {
         Intent intent = new Intent(this, DetailImoveis.class);
+
+        Imoveis imovel = arrayList.get(select);
+        intent.putExtra("id", imovel.getId());
+        intent.putExtra("bairro", imovel.getBairro());
+        intent.putExtra("banheiros", imovel.getBanheiros());
+        intent.putExtra("cidade", imovel.getCidade());
+        intent.putExtra("contato", imovel.getContato());
+        intent.putExtra("mensalidade", imovel.getMensalidade());
+        intent.putExtra("numero", imovel.getNumero());
+        intent.putExtra("quartos", imovel.getQuartos());
+        intent.putExtra("rua", imovel.getRua());
+        intent.putExtra("uf", imovel.getUf());
+
         startActivity(intent);
     }
 
