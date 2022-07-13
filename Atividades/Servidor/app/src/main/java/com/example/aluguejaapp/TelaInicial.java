@@ -66,22 +66,6 @@ public class TelaInicial<childEventListener> extends AppCompatActivity {
             }
         });
 
-
-
-//        editar.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Imoveis imovel = arrayList.get(select);
-//                String numContato = imovel.getContato();
-//
-//                String message = "Olá, me interessei pelo seu imóvel que fica no endereço " + imovel.getRua() + ", " + imovel.getNumero() + ", que fica no " + imovel.getBairro() + ".";
-//
-//                Intent intent = new Intent(Intent.ACTION_VIEW);
-//                intent.setData(Uri.parse("http://api.whatsapp.com/send/?phone="+"+55"+numContato + "&text=" + message));
-//                startActivity(intent);
-//            }
-//        });
-
         databaseReference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String previousChildName) {
