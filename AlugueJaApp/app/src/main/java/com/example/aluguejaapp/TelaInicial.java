@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.Log;
@@ -15,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -56,6 +58,8 @@ public class TelaInicial<childEventListener> extends AppCompatActivity {
         listView.setAdapter(arrayAdapter);
         select = -1;
 
+        Button alugar = findViewById(R.id.btnAlugar);
+
         listView.setSelector(android.R.color.holo_blue_dark);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -63,6 +67,20 @@ public class TelaInicial<childEventListener> extends AppCompatActivity {
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
                 //Toast.makeText(TelaInicial.this, "" + arrayList.get(position).toString(), Toast.LENGTH_SHORT).show();
                 select = position;
+            }
+        });
+
+        alugar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Imoveis imovel = arrayList.get(select);
+                String numContato = imovel.getContato();
+
+                String message = "Olá, me interessei pelo seu imóvel que fica no endereço " + imovel.getRua() + ", " + imovel.getNumero() + ", que fica no " + imovel.getBairro() + ".";
+
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse("http://api.whatsapp.com/send/?phone="+"+55"+numContato + "&text=" + message));
+                startActivity(intent);
             }
         });
 
