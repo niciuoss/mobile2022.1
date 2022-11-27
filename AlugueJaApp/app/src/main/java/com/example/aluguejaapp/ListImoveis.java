@@ -64,7 +64,7 @@ public class ListImoveis extends AppCompatActivity {
         edtBanheiros = findViewById(R.id.editTextBanheiros);
         edtContato = findViewById(R.id.editTextContato);
 
-        meuFirebase = new Firebase("https://alugueja-app-a39b6-default-rtdb.firebaseio.com/");
+        meuFirebase = new Firebase("https://alugueja-app-d1519-default-rtdb.firebaseio.com/");
 
         btnConfirma.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,6 +116,7 @@ public class ListImoveis extends AppCompatActivity {
             edtMensalidade.setText(mensalidade);
             edtQuartos.setText(quartos);
             edtBanheiros.setText(banheiros);
+            edtContato.setText(contato);
 
             edit = true;
         }

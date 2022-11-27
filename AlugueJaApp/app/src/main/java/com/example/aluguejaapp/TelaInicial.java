@@ -65,7 +65,7 @@ public class TelaInicial<childEventListener> extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
-                //Toast.makeText(TelaInicial.this, "" + arrayList.get(position).toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(TelaInicial.this, "" + arrayList.get(position).toString(), Toast.LENGTH_SHORT).show();
                 select = position;
             }
         });
